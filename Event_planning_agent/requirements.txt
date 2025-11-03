@@ -1,9 +1,0 @@
-# Core dependencies
-psycopg2-binary>=2.9.0
-python-dotenv>=1.0.0
-
-# AI/ML frameworks (minimal set)
-langchain-community>=0.0.20
-
-# Optional: For enhanced functionality
-numpy>=1.21.0
