@@ -5,8 +5,8 @@ services:
     env: python
     region: oregon
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: bash render_start.sh
+    buildCommand: pip install -r event_planning_agent_v2/requirements.txt
+    startCommand: uvicorn event_planning_agent_v2.wsgi:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: API_HOST
         value: 0.0.0.0
