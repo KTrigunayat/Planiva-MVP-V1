@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from event_planning_agent_v2.config.settings import get_settings
 from event_planning_agent_v2.api.routes import router
-from event_planning_agent_v2.api.middleware import ErrorHandlingMiddleware, LoggingMiddleware
+from event_planning_agent_v2.api.middleware import ErrorHandlingMiddleware, ObservabilityMiddleware
 
 # Get settings
 settings = get_settings()
@@ -33,7 +33,7 @@ app.add_middleware(
 
 # Add custom middleware
 app.add_middleware(ErrorHandlingMiddleware)
-app.add_middleware(LoggingMiddleware)
+app.add_middleware(ObservabilityMiddleware)
 
 # Include API routes
 app.include_router(router, prefix="/v1")
