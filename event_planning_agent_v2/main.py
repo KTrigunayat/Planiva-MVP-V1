@@ -25,7 +25,7 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=settings.api.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -54,11 +54,11 @@ def main():
     """Main entry point"""
     uvicorn.run(
         "event_planning_agent_v2.main:app",
-        host=settings.api_host,
-        port=settings.api_port,
-        reload=settings.api_reload,
-        workers=settings.api_workers if not settings.api_reload else 1,
-        log_level=settings.log_level.lower()
+        host=settings.api.host,
+        port=settings.api.port,
+        reload=settings.api.reload,
+        workers=settings.api.workers if not settings.api.reload else 1,
+        log_level=settings.observability.log_level.value.lower()
     )
 
 if __name__ == "__main__":
