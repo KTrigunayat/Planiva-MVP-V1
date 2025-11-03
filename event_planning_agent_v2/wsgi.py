@@ -1,19 +1,22 @@
 """
 WSGI entry point for deployment
-This file ensures proper module imports when deployed
+Handles imports correctly regardless of how the app is run
 """
 import sys
+import os
 from pathlib import Path
 
-# Add parent directory to Python path
-parent_dir = str(Path(__file__).parent.parent)
+# Get the parent directory (repo root)
+parent_dir = str(Path(__file__).parent.parent.absolute())
+
+# Add parent to Python path so we can import event_planning_agent_v2 as a package
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-# Now import the app
+# Import the FastAPI app
 from event_planning_agent_v2.main import app
 
-# Export for WSGI servers
+# Export for ASGI servers
 application = app
 
 if __name__ == "__main__":
