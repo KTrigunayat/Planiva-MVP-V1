@@ -1,0 +1,32 @@
+services:
+  # FastAPI Backend
+  - type: web
+    name: planiva-api
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn event_planning_agent_v2.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: API_HOST
+        value: 0.0.0.0
+      - key: API_PORT
+        value: 8000
+      - key: LOG_LEVEL
+        value: INFO
+      - key: ENVIRONMENT
+        value: production
+      - key: CORS_ORIGINS
+        value: '["*"]'
+      # Add your other environment variables in Render dashboard
+    healthCheckPath: /health
+
+  # PostgreSQL Database
+  - type: pserv
+    name: planiva-db
+    env: docker
+    plan: free
+    disk:
+      name: planiva-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
