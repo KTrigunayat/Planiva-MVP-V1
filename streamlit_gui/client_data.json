@@ -1,0 +1,81 @@
+{
+  "form_data": {
+    "client_name": "Priya & Rohit",
+    "client_email": "priya.rohit@email.com",
+    "client_phone": "+91-98765-43210",
+    "event_type": "Wedding",
+    "event_date": "2025-12-15",
+    "location": "Bangalore, Karnataka, India",
+    "start_time": "18:00",
+    "duration_hours": 6,
+    
+    "total_guests": 150,
+    "ceremony_guests": 100,
+    "reception_guests": 150,
+    "adult_guests": 140,
+    "child_guests": 10,
+    "special_needs_guests": 0,
+    
+    "total_budget": 800000,
+    "budget_flexibility": "Flexible - Can go 10% over",
+    "budget_allocation": {
+      "venue": 240000,
+      "catering": 320000,
+      "photography": 80000,
+      "flowers": 64000,
+      "music": 48000,
+      "other": 48000
+    },
+    
+    "venue_types": ["Banquet Hall", "Restaurant"],
+    "venue_style": ["Traditional", "Elegant"],
+    "essential_amenities": ["Air Conditioning", "Sound System", "Parking", "Kitchen Facilities"],
+    
+    "cuisine_preferences": ["Indian"],
+    "dietary_restrictions": ["Vegetarian options needed"],
+    "service_style": "Buffet",
+    
+    "photography_needed": true,
+    "photography_style": ["Traditional/Classic", "Candid/Natural"],
+    "videography_needed": true,
+    "makeup_needed": true,
+    "makeup_style": ["Classic", "Traditional"],
+    "additional_services": ["Live band", "Florist", "Wedding planner"],
+    
+    "event_theme": "Traditional Elegant",
+    "color_scheme": "Red, Gold, and Maroon",
+    "style_preferences": ["Traditional", "Elegant"],
+    "client_vision": "We want an intimate, cozy wedding celebration in Bangalore with close family and friends. Focus on quality over quantity with excellent food and beautiful photography. We prefer traditional South Indian and North Indian cuisine with vegetarian options only. The ambiance should be elegant with traditional decorations in red, gold, and maroon colors.",
+    "special_traditions": "Traditional South Indian wedding rituals, Saptapadi ceremony, Mangalsutra ceremony",
+    "must_haves": "Excellent vegetarian food, professional photography, traditional decorations, live classical music",
+    "avoid_elements": "Non-vegetarian food, overly modern decor, loud DJ music, alcohol service",
+    
+    "priorities": {
+      "food_quality": "high",
+      "photography": "high",
+      "venue_ambiance": "high",
+      "traditional_elements": "high",
+      "music": "medium",
+      "flowers": "medium"
+    },
+    "guest_preferences": ["Large families (need family seating)", "Elderly guests (need easy access)"],
+    "atmosphere_goals": ["Intimate and cozy", "Traditional and timeless", "Elegant and refined"],
+    "transportation_needs": ["Parking for large vehicles"],
+    "catering_special_requirements": "100% vegetarian menu, traditional South Indian breakfast, North Indian dinner, no alcohol service, Jain food options available",
+    "service_requirements": "Traditional wedding coordination, priest coordination, decoration setup, photography coordination",
+    
+    "beverages_allowed": false,
+    "alcohol_service": false,
+    "religious_requirements": "Hindu wedding rituals, priest services, traditional ceremonies",
+    "cultural_preferences": "South Indian traditions, classical music, traditional attire encouraged",
+    
+    "form_version": "1.0",
+    "submitted_at": "2025-10-08T12:00:00Z"
+  },
+  "exported_at": "2025-10-08T12:00:00Z",
+  "version": "1.0",
+  "client_type": "traditional_indian_wedding",
+  "location_region": "bangalore_india",
+  "currency": "INR",
+  "notes": "Traditional Indian wedding with focus on vegetarian cuisine and cultural authenticity. Client prefers intimate celebration with high-quality vendors and traditional elements."
+}

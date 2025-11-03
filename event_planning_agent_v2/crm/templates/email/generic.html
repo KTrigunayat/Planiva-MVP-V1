@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ email_subject|default("Update from " + company_name) }}{% endblock %}
+
+{% block header_title %}{{ header_title|default("Event Planning Update") }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ client_name|default("there") }},
+</div>
+
+<div class="message">
+    {{ message_body|default("<p>We have an update regarding your event plan.</p>") }}
+</div>
+
+{% if action_url %}
+<div class="button-container">
+    <a href="{{ action_url }}" class="button">{{ action_text|default("View Details") }}</a>
+</div>
+{% endif %}
+
+<div class="message">
+    <p>If you have any questions, please don't hesitate to reach out.</p>
+    
+    <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

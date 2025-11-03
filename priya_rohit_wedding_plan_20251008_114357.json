@@ -1,0 +1,162 @@
+{
+  "client_info": {
+    "clientName": "Priya & Rohit",
+    "guestCount": {
+      "Reception": 150,
+      "Ceremony": 100
+    },
+    "clientVision": "We want an intimate, cozy wedding celebration in Bangalore with close family and friends. Focus on quality over quantity with excellent food and beautiful photography.",
+    "venuePreferences": [
+      "Banquet Hall",
+      "Restaurant"
+    ],
+    "essentialVenueAmenities": [
+      "Air Conditioning",
+      "Sound System"
+    ],
+    "decorationAndAmbiance": {
+      "desiredTheme": "traditional elegant",
+      "colorScheme": [
+        "red",
+        "gold",
+        "maroon"
+      ]
+    },
+    "foodAndCatering": {
+      "cuisinePreferences": [
+        "South Indian",
+        "North Indian"
+      ],
+      "dietaryOptions": [
+        "Vegetarian"
+      ],
+      "beverages": {
+        "allowed": false
+      }
+    },
+    "additionalRequirements": {
+      "photography": "Traditional photography with some candid shots",
+      "makeup": "Classic bridal makeup"
+    },
+    "budget": 800000,
+    "location": "Bangalore"
+  },
+  "selected_vendors": {
+    "venue": {
+      "vendor_id": "37710a6e-70d8-454b-a118-1886ef7a51f8",
+      "name": "Nandana Magnolious - South Bangalore, Bangalore",
+      "area_name": "Full Venue",
+      "area_type": "indoor & outdoor",
+      "location_city": "Bangalore",
+      "location_full": "Badamanavarthekaval, Bangalore (View on Map)No. 61/P4,  Pipeline Road, (Near Kanakapura Road), \nLakshmipura, Bengaluru,...",
+      "ideal_capacity": 10,
+      "max_seating_capacity": 1500,
+      "rental_cost": 6500,
+      "min_veg_price": 65,
+      "policies": {
+        "dj": "In house DJ available, Outside DJ not permitted",
+        "decor": "Outside decorators permitted",
+        "alcohol": "In house alcohol available, Outside alcohol  permitted",
+        "catering": "Inhouse & outside catering allowed"
+      },
+      "room_count": 2,
+      "room_cost": 1500,
+      "decor_options": [
+        {
+          "cost": 975,
+          "decor_type": "traditional"
+        },
+        {
+          "cost": 1300,
+          "decor_type": "modern"
+        },
+        {
+          "cost": 780,
+          "decor_type": "minimalist"
+        }
+      ],
+      "attributes": {
+        "about": "Premium venue in Bangalore with indoor & outdoor space",
+        "policies": {
+          "dj": "In house DJ available, Outside DJ not permitted",
+          "decor": "Outside decorators permitted",
+          "alcohol": "In house alcohol available, Outside alcohol  permitted",
+          "catering": "Inhouse & outside catering allowed"
+        },
+        "area_type": "indoor & outdoor"
+      },
+      "embedding": null,
+      "ranking_score": "0.6999"
+    },
+    "caterer": {
+      "vendor_id": "4875e660-1d45-4c31-a1ab-c8c98fb63ce9",
+      "name": "TechFork",
+      "location_city": "Bangalore",
+      "location_full": "Bangalore",
+      "veg_only": false,
+      "min_veg_price": 120,
+      "min_non_veg_price": 200,
+      "max_guest_capacity": 10000,
+      "attributes": {
+        "about": "TechFork catering is a catering/ food services provider company and is based out of Bangalore. They have been in the wedding catering business for quite some years now and they leave no stone unturned to provide you and your guests the best meal on your wedding day. They are high on experience and try to provide maximum customer satisfaction by witnessing a smile on the clientâ€™s face. TechFork catering offers customised menus for any type of party/event and wedding at a reasonable pricing.\nThey can prepare a menu of food according to your choice and for any number of people ranging from 30 to 3000. Be it any pre-wedding function with minimal gathering or your final wedding function with a large number of guests they can help you with all. They can serve up to 3000 guests and have been a customer's delight for their exclusive cuisines cooked and served with excellent hygiene practices.\n** Style of work**\nThey are very easy to work with and have built a relationship of trust with their customers in addition to providing a variety of options and timely services. TechFork Catering understands the importance of your big special day and keeps in mind that there can be no compromises when it comes to the taste of food at your wedding. They make delicious dishes with a pinch of innovation and with a lot of dedication.\nThey love what their job is and it is to keep people happy by providing them lip-smacking dishes. They keep the hygiene in the process of making food on top priority and keeps it as a prime focused objective. The team of TechFork catering has a very supportive and friendly staff and is very professional at the same time when it comes to punctuality.\n**",
+        "cuisines": []
+      },
+      "embedding": null,
+      "ranking_score": "0.5998"
+    },
+    "photographer": {
+      "vendor_id": "0669d58a-fd20-4e1a-889d-f81eaa10560f",
+      "name": "Thaha Rayan Photography",
+      "location_city": "Bangalore",
+      "location_full": "Electronic City, Bangalore",
+      "photo_package_price": 15000,
+      "video_available": true,
+      "attributes": {
+        "about": "Professional photographer in Bangalore",
+        "styles": [
+          "candid",
+          "traditional"
+        ],
+        "services": [
+          "Albums",
+          "Candid Photography",
+          "Maternity Shoots",
+          "Pre-Wedding Films",
+          "Pre-Wedding Shoots",
+          "Traditional Photography",
+          "Wedding Cinematography / Films",
+          "Wedding Shoots"
+        ]
+      },
+      "embedding": null,
+      "ranking_score": "0.3143"
+    },
+    "makeup_artist": {
+      "vendor_id": "87633953-9476-48f4-bae0-06117216d31c",
+      "name": "Mala Beauty Parlour",
+      "location_city": "Bangalore",
+      "location_full": "Uttarahalli, Bangalore",
+      "bridal_makeup_price": 7500,
+      "on_site_service": false,
+      "attributes": {
+        "about": "Professional makeup artist in Bangalore",
+        "services": [
+          "Bridal Makeup",
+          "Draping",
+          "Engagement Makeup",
+          "Hair Styling",
+          "Party Makeup"
+        ],
+        "specialties": [
+          "bridal",
+          "party"
+        ]
+      },
+      "embedding": null,
+      "ranking_score": "0.375"
+    }
+  },
+  "total_cost": 47000,
+  "budget_remaining": 753000,
+  "generated_at": "2025-10-08T11:43:57.350733"
+}

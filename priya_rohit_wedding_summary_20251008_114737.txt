@@ -1,0 +1,27 @@
+PRIYA & ROHIT'S WEDDING PLAN
+==================================================
+
+Client: Priya & Rohit
+Date: 2026-01-06
+Location: Bangalore
+Guests: 150
+Budget: ₹800,000
+
+SELECTED VENDORS
+--------------------
+Venue: Grand Banquet Hall Bangalore
+  Contact: +91-80-12345678
+  Email: events@grandbanquet.com
+
+Caterer: Royal South Indian Caterers
+  Contact: +91-98765-43210
+  Email: bookings@royalcaterers.com
+
+Photographer: Traditional Moments Photography
+  Contact: +91-99876-54321
+  Email: info@traditionalmoments.com
+
+Makeup_Artist: Bridal Beauty Experts
+  Contact: +91-98765-12345
+  Email: bookings@bridalbeauty.com
+

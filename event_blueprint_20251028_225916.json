@@ -1,0 +1,28 @@
+{
+  "plan_id": "demo_plan_20251028_225913",
+  "client_info": {
+    "name": "Priya & Rohit",
+    "email": "priya.rohit@email.com",
+    "phone": "+91-98765-43210"
+  },
+  "event_details": {
+    "type": "Wedding",
+    "date": "2025-12-15",
+    "location": "Bangalore, Karnataka, India",
+    "guests": 150,
+    "theme": "Traditional Elegant",
+    "color_scheme": "Red, Gold, and Maroon"
+  },
+  "budget": {
+    "total": 800000,
+    "allocated": {
+      "venue": 240000,
+      "catering": 320000,
+      "photography": 80000,
+      "flowers": 64000,
+      "music": 48000,
+      "other": 48000
+    }
+  },
+  "generated_at": "2025-10-28T22:59:16.787937"
+}

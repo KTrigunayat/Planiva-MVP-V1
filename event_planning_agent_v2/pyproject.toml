@@ -1,0 +1,111 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "event-planning-agent-v2"
+version = "2.0.0"
+description = "AI-powered event planning system with multi-agent collaboration"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Event Planning Team", email = "team@eventplanning.ai"}
+]
+keywords = ["ai", "event-planning", "multi-agent", "crewai", "langgraph"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "crewai>=0.41.1",
+    "langgraph>=0.2.0",
+    "langchain>=0.2.0",
+    "fastapi>=0.104.0",
+    "psycopg2-binary>=2.9.7",
+    "sqlalchemy>=2.0.23",
+    "pydantic>=2.5.0",
+    "ollama>=0.1.7",
+    "mcp>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.9.0",
+    "flake8>=6.1.0",
+    "mypy>=1.6.0",
+]
+monitoring = [
+    "prometheus-client>=0.19.0",
+    "structlog>=23.2.0",
+    "python-json-logger>=2.0.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/eventplanning/agent-v2"
+Repository = "https://github.com/eventplanning/agent-v2.git"
+Documentation = "https://eventplanning.github.io/agent-v2/"
+"Bug Tracker" = "https://github.com/eventplanning/agent-v2/issues"
+
+[project.scripts]
+event-planning-server = "event_planning_agent_v2.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["event_planning_agent_v2*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "event_planning_agent_v2/tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]

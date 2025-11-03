@@ -1,0 +1,186 @@
+groups:
+  - name: crm_critical_alerts
+    interval: 30s
+    rules:
+      # Authentication failure alert
+      - alert: CRMAuthenticationFailure
+        expr: increase(crm_api_errors_total{error_type="auth"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: crm
+        annotations:
+          summary: "CRM authentication failure detected"
+          description: "Authentication failure for {{ $labels.api }} API. Immediate action required."
+          
+      # All channels failed alert
+      - alert: CRMAllChannelsFailed
+        expr: |
+          sum(rate(crm_communications_total{status="failed"}[5m])) by (message_type) > 0
+          and
+          sum(rate(crm_communications_total{status=~"sent|delivered"}[5m])) by (message_type) == 0
+        for: 2m
+        labels:
+          severity: critical
+          component: crm
+        annotations:
+          summary: "All CRM communication channels failed"
+          description: "All channels failed for message type {{ $labels.message_type }}. No communications being delivered."
+
+  - name: crm_high_priority_alerts
+    interval: 1m
+    rules:
+      # Low delivery rate alert
+      - alert: CRMDeliveryRateLow
+        expr: |
+          (
+            sum(rate(crm_communications_total{status="delivered"}[15m]))
+            /
+            sum(rate(crm_communications_total[15m]))
+          ) < 0.90
+        for: 5m
+        labels:
+          severity: high
+          component: crm
+        annotations:
+          summary: "CRM delivery rate below 90%"
+          description: "Communication delivery rate is {{ $value | humanizePercentage }}. Target is 90%."
+          
+      # High API error rate alert
+      - alert: CRMAPIErrorRateHigh
+        expr: |
+          (
+            sum(rate(crm_api_errors_total[10m])) by (api)
+            /
+            (sum(rate(crm_communications_total[10m])) by (api) + 1)
+          ) > 0.05
+        for: 5m
+        labels:
+          severity: high
+          component: crm
+        annotations:
+          summary: "CRM API error rate exceeds 5%"
+          description: "API {{ $labels.api }} error rate is {{ $value | humanizePercentage }}. Investigate immediately."
+          
+      # Channel unavailable alert
+      - alert: CRMChannelUnavailable
+        expr: crm_channel_availability == 0
+        for: 3m
+        labels:
+          severity: high
+          component: crm
+        annotations:
+          summary: "CRM channel unavailable"
+          description: "Channel {{ $labels.channel }} is unavailable. Communications may be impacted."
+
+  - name: crm_medium_priority_alerts
+    interval: 2m
+    rules:
+      # High retry rate alert
+      - alert: CRMRetryRateHigh
+        expr: |
+          (
+            sum(rate(crm_retry_attempts_total[15m]))
+            /
+            sum(rate(crm_communications_total[15m]))
+          ) > 0.20
+        for: 10m
+        labels:
+          severity: medium
+          component: crm
+        annotations:
+          summary: "CRM retry rate exceeds 20%"
+          description: "Communication retry rate is {{ $value | humanizePercentage }}. May indicate delivery issues."
+          
+      # Low email open rate alert
+      - alert: CRMEmailOpenRateLow
+        expr: crm_open_rate < 0.40
+        for: 30m
+        labels:
+          severity: medium
+          component: crm
+        annotations:
+          summary: "Email open rate below 40%"
+          description: "Open rate for {{ $labels.message_type }} is {{ $value | humanizePercentage }}. Review email content."
+          
+      # High fallback usage alert
+      - alert: CRMFallbackUsageHigh
+        expr: |
+          sum(rate(crm_fallback_used_total[15m])) by (primary_channel) > 0.1
+        for: 10m
+        labels:
+          severity: medium
+          component: crm
+        annotations:
+          summary: "High fallback channel usage"
+          description: "Primary channel {{ $labels.primary_channel }} failing frequently. Fallback rate: {{ $value }}."
+
+  - name: crm_performance_alerts
+    interval: 5m
+    rules:
+      # Slow delivery time alert
+      - alert: CRMDeliveryTimeSlow
+        expr: |
+          histogram_quantile(0.95, 
+            sum(rate(crm_delivery_time_seconds_bucket[10m])) by (le, channel)
+          ) > 300
+        for: 10m
+        labels:
+          severity: medium
+          component: crm
+        annotations:
+          summary: "CRM delivery time is slow"
+          description: "95th percentile delivery time for {{ $labels.channel }} is {{ $value }}s. Target is <300s."
+          
+      # High queue size alert
+      - alert: CRMQueueSizeHigh
+        expr: crm_queue_size > 100
+        for: 5m
+        labels:
+          severity: medium
+          component: crm
+        annotations:
+          summary: "CRM queue size is high"
+          description: "Queue size for {{ $labels.priority }} priority is {{ $value }}. May indicate processing bottleneck."
+          
+      # Many active communications alert
+      - alert: CRMActiveCommuni cationsHigh
+        expr: crm_active_communications > 50
+        for: 5m
+        labels:
+          severity: low
+          component: crm
+        annotations:
+          summary: "High number of active communications"
+          description: "{{ $value }} communications currently being processed. Monitor for performance impact."
+
+  - name: crm_recording_rules
+    interval: 1m
+    rules:
+      # Delivery rate by channel
+      - record: crm:delivery_rate:by_channel
+        expr: |
+          sum(rate(crm_communications_total{status="delivered"}[5m])) by (channel)
+          /
+          sum(rate(crm_communications_total[5m])) by (channel)
+          
+      # Overall delivery rate
+      - record: crm:delivery_rate:overall
+        expr: |
+          sum(rate(crm_communications_total{status="delivered"}[5m]))
+          /
+          sum(rate(crm_communications_total[5m]))
+          
+      # API error rate by provider
+      - record: crm:api_error_rate:by_api
+        expr: |
+          sum(rate(crm_api_errors_total[5m])) by (api)
+          /
+          (sum(rate(crm_communications_total[5m])) by (api) + 1)
+          
+      # Retry rate
+      - record: crm:retry_rate:overall
+        expr: |
+          sum(rate(crm_retry_attempts_total[5m]))
+          /
+          sum(rate(crm_communications_total[5m]))

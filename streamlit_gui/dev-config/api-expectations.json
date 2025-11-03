@@ -1,0 +1,183 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/health"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "status": "healthy",
+        "timestamp": "2024-01-01T00:00:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/v1/plans"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "plan_id": "mock-plan-123",
+        "status": "created",
+        "message": "Plan created successfully"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/v1/plans/mock-plan-123/status"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "plan_id": "mock-plan-123",
+        "status": "in_progress",
+        "progress": 75,
+        "current_step": "vendor_sourcing",
+        "estimated_completion": "2024-01-01T01:00:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/v1/plans/mock-plan-123/results"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "plan_id": "mock-plan-123",
+        "combinations": [
+          {
+            "id": "combo-1",
+            "fitness_score": 85.5,
+            "total_cost": 45000,
+            "venue": {
+              "id": "venue-1",
+              "name": "Garden Paradise",
+              "type": "outdoor",
+              "cost": 15000
+            },
+            "caterer": {
+              "id": "caterer-1",
+              "name": "Italian Delights",
+              "cuisine": "italian",
+              "cost": 18000
+            },
+            "photographer": {
+              "id": "photographer-1",
+              "name": "Perfect Moments",
+              "cost": 8000
+            },
+            "makeup_artist": {
+              "id": "makeup-1",
+              "name": "Beauty Studio",
+              "cost": 4000
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/v1/plans/mock-plan-123/select"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "plan_id": "mock-plan-123",
+        "status": "selected",
+        "blueprint_id": "blueprint-456",
+        "message": "Combination selected successfully"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/v1/plans/mock-plan-123/blueprint"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "plan_id": "mock-plan-123",
+        "blueprint_id": "blueprint-456",
+        "timeline": [
+          {
+            "time": "09:00",
+            "activity": "Venue setup begins",
+            "responsible": "venue_coordinator"
+          },
+          {
+            "time": "14:00",
+            "activity": "Ceremony starts",
+            "responsible": "officiant"
+          }
+        ],
+        "vendors": {
+          "venue": {
+            "name": "Garden Paradise",
+            "contact": "venue@example.com",
+            "phone": "+1-555-VENUE"
+          },
+          "caterer": {
+            "name": "Italian Delights",
+            "contact": "catering@example.com",
+            "phone": "+1-555-CATER"
+          }
+        },
+        "total_cost": 45000
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/v1/plans"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "plans": [
+          {
+            "id": "mock-plan-123",
+            "client_name": "John Doe",
+            "event_type": "wedding",
+            "status": "completed",
+            "created_at": "2024-01-01T00:00:00Z"
+          }
+        ],
+        "total": 1,
+        "limit": 50,
+        "offset": 0
+      }
+    }
+  }
+]

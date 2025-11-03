@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Update on Your Plan - Plan #{{ plan_id }}{% endblock %}
+
+{% block header_title %}We Encountered an Issue{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ client_name }},
+</div>
+
+<div class="message">
+    <p>We wanted to let you know that we encountered an unexpected issue while processing your {{ event_type }} plan.</p>
+    
+    <div class="info-box">
+        <h3>What Happened</h3>
+        <p style="color: #666;">{{ error_message|default("We experienced a technical difficulty while processing your request.") }}</p>
+        <p style="margin-top: 10px;"><strong>Plan ID:</strong> {{ plan_id }}</p>
+        {% if error_timestamp %}
+        <p><strong>Time:</strong> {{ error_timestamp|format_date("%B %d, %Y at %I:%M %p") }}</p>
+        {% endif %}
+    </div>
+    
+    <p><strong>What we're doing:</strong></p>
+    <ul>
+        <li>Our team has been automatically notified</li>
+        <li>We're investigating the issue right now</li>
+        <li>We'll resolve this as quickly as possible</li>
+        <li>Your data and preferences are safe</li>
+    </ul>
+    
+    <p>We sincerely apologize for any inconvenience. We're committed to providing you with the best experience possible.</p>
+</div>
+
+<div class="button-container">
+    <a href="{{ website_url }}/plans/{{ plan_id }}" class="button">Check Plan Status</a>
+</div>
+
+<div class="message">
+    <p><strong>Need immediate assistance?</strong></p>
+    <p>Contact our support team:</p>
+    <ul style="list-style: none; padding-left: 0;">
+        <li>📧 Email: <a href="mailto:{{ support_email }}">{{ support_email }}</a></li>
+        <li>🌐 Help Center: <a href="{{ website_url }}/help">{{ website_url }}/help</a></li>
+    </ul>
+    
+    <p style="margin-top: 30px;">
+        Thank you for your patience and understanding.<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

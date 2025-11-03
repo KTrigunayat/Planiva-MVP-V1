@@ -1,0 +1,76 @@
+# Docker Compose for Event Planning Agent v2 GUI Development
+version: '3.8'
+
+services:
+  streamlit-gui-dev:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://api:8000
+      - ENVIRONMENT=development
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_ENABLE_CORS=false
+      - STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
+    env_file:
+      - .env.development
+    volumes:
+      # Mount source code for hot reloading
+      - .:/app
+      - /app/__pycache__
+      - /app/.pytest_cache
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - event-planning-dev-network
+    command: ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
+
+  # Mock API service for development
+  api:
+    image: mockserver/mockserver:latest
+    ports:
+      - "8000:1080"
+    environment:
+      - MOCKSERVER_PROPERTY_FILE=/config/mockserver.properties
+      - MOCKSERVER_INITIALIZATION_JSON_PATH=/config/expectations.json
+    volumes:
+      - ./dev-config/mockserver.properties:/config/mockserver.properties
+      - ./dev-config/api-expectations.json:/config/expectations.json
+    networks:
+      - event-planning-dev-network
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - event-planning-dev-network
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+
+  # PostgreSQL for testing (optional)
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=event_planning_test
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - event-planning-dev-network
+
+networks:
+  event-planning-dev-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  postgres-data:

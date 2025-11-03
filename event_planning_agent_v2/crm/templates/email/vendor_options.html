@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Your Vendor Options Are Ready - Plan #{{ plan_id }}{% endblock %}
+
+{% block header_title %}Perfect Vendor Matches Found!{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Exciting news, {{ client_name }}! ✨
+</div>
+
+<div class="message">
+    <p>We've found <strong>{{ vendor_combinations|length }} amazing vendor combinations</strong> that perfectly match your requirements and budget for your {{ event_type }}!</p>
+    
+    <p>Each combination has been carefully curated by our AI to ensure quality, compatibility, and value. Take your time reviewing the options below.</p>
+    
+    {% if vendor_combinations %}
+    <h3 style="color: #667eea; margin-top: 30px;">Your Vendor Combinations:</h3>
+    
+    {% for combination in vendor_combinations %}
+    <div style="background-color: #ffffff; border: 2px solid #e0e0e0; border-radius: 8px; padding: 20px; margin: 20px 0; {% if combination.recommended %}border-color: #667eea; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);{% endif %}">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h4 style="margin: 0; color: #333;">Option {{ loop.index }}</h4>
+            {% if combination.recommended %}
+            <span style="background-color: #667eea; color: white; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">BEST MATCH</span>
+            {% endif %}
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+            <p style="margin: 0; font-size: 24px; font-weight: bold; color: #667eea;">{{ combination.total_cost|format_currency }}</p>
+            <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Total Cost</p>
+        </div>
+        
+        {% if combination.vendors %}
+        <table style="width: 100%; margin-top: 15px;">
+            {% for vendor in combination.vendors %}
+            <tr style="border-bottom: 1px solid #e0e0e0;">
+                <td style="padding: 12px 0;">
+                    <strong style="color: #333;">{{ vendor.category }}</strong><br>
+                    <span style="color: #666; font-size: 14px;">{{ vendor.name }}</span>
+                    {% if vendor.rating %}
+                    <span style="color: #ffa500; font-size: 14px;">★ {{ vendor.rating }}</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 12px 0; text-align: right;">
+                    <strong style="color: #333;">{{ vendor.cost|format_currency }}</strong>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        
+        {% if combination.highlights %}
+        <div style="margin-top: 15px; padding: 12px; background-color: #f0f7ff; border-radius: 6px;">
+            <p style="margin: 0; color: #667eea; font-weight: 600; font-size: 14px;">✓ Why this combination works:</p>
+            <ul style="margin: 8px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;">
+                {% for highlight in combination.highlights %}
+                <li>{{ highlight }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ website_url }}/plans/{{ plan_id }}/vendors/{{ combination.id }}" style="display: inline-block; padding: 12px 24px; background-color: #667eea; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">View Details</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+    <div class="info-box" style="margin-top: 30px;">
+        <h3>Next Steps</h3>
+        <ol style="margin: 10px 0; padding-left: 20px;">
+            <li>Review each vendor combination carefully</li>
+            <li>Click "View Details" to see full vendor profiles and portfolios</li>
+            <li>Select your preferred combination</li>
+            <li>We'll generate your complete event blueprint</li>
+        </ol>
+    </div>
+    
+    <p><strong>Need help deciding?</strong> Our team is available to discuss your options and answer any questions.</p>
+</div>
+
+<div class="button-container">
+    <a href="{{ website_url }}/plans/{{ plan_id }}/vendors" class="button">Compare All Options</a>
+</div>
+
+<div class="message">
+    <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

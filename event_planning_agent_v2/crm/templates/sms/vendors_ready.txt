@@ -1,0 +1,1 @@
+We found {vendor_count} vendor combinations for your {event_type}! Check them out: {link}

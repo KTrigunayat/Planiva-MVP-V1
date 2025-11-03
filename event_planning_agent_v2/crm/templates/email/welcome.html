@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to {{ company_name }} - Plan #{{ plan_id }}{% endblock %}
+
+{% block header_title %}Welcome to Your Event Planning Journey!{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ client_name }}! 👋
+</div>
+
+<div class="message">
+    <p>We're thrilled to help you plan your <strong>{{ event_type }}</strong>! Your event planning journey has officially begun, and we're here to make it smooth, stress-free, and exciting.</p>
+    
+    <div class="info-box">
+        <h3>Your Plan Details</h3>
+        <p><strong>Plan ID:</strong> {{ plan_id }}</p>
+        <p><strong>Event Type:</strong> {{ event_type }}</p>
+        {% if event_date %}
+        <p><strong>Event Date:</strong> {{ event_date|format_date }}</p>
+        {% endif %}
+        {% if guest_count %}
+        <p><strong>Expected Guests:</strong> {{ guest_count }}</p>
+        {% endif %}
+    </div>
+    
+    <p><strong>What happens next?</strong></p>
+    <ol>
+        <li><strong>Budget Analysis:</strong> We'll create three customized budget strategies for your event</li>
+        <li><strong>Vendor Matching:</strong> Our AI will find the perfect vendor combinations for you</li>
+        <li><strong>Your Selection:</strong> Review and select your preferred vendors</li>
+        <li><strong>Blueprint Delivery:</strong> Receive your complete event blueprint</li>
+    </ol>
+    
+    <p>We'll keep you updated at every step via email{% if phone_number %}, SMS, and WhatsApp{% endif %}. You can expect your budget strategies within the next few hours.</p>
+</div>
+
+<div class="button-container">
+    <a href="{{ website_url }}/plans/{{ plan_id }}" class="button">View Your Plan</a>
+</div>
+
+<div class="message">
+    <p>Have questions? We're here to help! Reply to this email or contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>.</p>
+    
+    <p>Let's create something amazing together!</p>
+    
+    <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

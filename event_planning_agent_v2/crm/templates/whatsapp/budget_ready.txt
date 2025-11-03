@@ -1,0 +1,3 @@
+💰 Your budget strategies are ready!
+
+We've prepared 3 different budget options for your {event_type}. View them here: {link}

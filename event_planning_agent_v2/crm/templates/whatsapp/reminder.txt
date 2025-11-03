@@ -1,0 +1,3 @@
+⏰ Friendly reminder
+
+Please review your vendor options for plan #{plan_id}: {link}

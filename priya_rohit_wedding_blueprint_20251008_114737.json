@@ -1,0 +1,140 @@
+{
+  "event_info": {
+    "client_name": "Priya & Rohit",
+    "event_date": "2026-01-06",
+    "location": "Bangalore",
+    "guest_count": 150,
+    "budget": 800000.0,
+    "theme": "traditional elegant",
+    "client_vision": "We want an intimate, cozy wedding celebration in Bangalore with close family and friends. Focus on quality over quantity with excellent food and beautiful photography."
+  },
+  "selected_combination": {
+    "combination_id": "demo_combo_001",
+    "fitness_score": 92.5,
+    "total_cost": 745000,
+    "venue": {
+      "name": "Grand Banquet Hall Bangalore",
+      "location_city": "Bangalore",
+      "capacity": 200,
+      "rental_cost": 350000,
+      "contact_phone": "+91-80-12345678",
+      "contact_email": "events@grandbanquet.com",
+      "amenities": [
+        "Air Conditioning",
+        "Sound System",
+        "Parking",
+        "Bridal Suite"
+      ]
+    },
+    "caterer": {
+      "name": "Royal South Indian Caterers",
+      "location_city": "Bangalore",
+      "cost_per_person": 1800,
+      "total_cost": 270000,
+      "contact_phone": "+91-98765-43210",
+      "contact_email": "bookings@royalcaterers.com",
+      "specialties": [
+        "South Indian",
+        "North Indian",
+        "Vegetarian"
+      ]
+    },
+    "photographer": {
+      "name": "Traditional Moments Photography",
+      "location_city": "Bangalore",
+      "package_cost": 75000,
+      "contact_phone": "+91-99876-54321",
+      "contact_email": "info@traditionalmoments.com",
+      "styles": [
+        "Traditional",
+        "Candid",
+        "Portrait"
+      ]
+    },
+    "makeup_artist": {
+      "name": "Bridal Beauty Experts",
+      "location_city": "Bangalore",
+      "bridal_package_cost": 50000,
+      "contact_phone": "+91-98765-12345",
+      "contact_email": "bookings@bridalbeauty.com",
+      "styles": [
+        "Classic",
+        "Traditional",
+        "Natural"
+      ]
+    }
+  },
+  "timeline": {
+    "pre_event": [
+      {
+        "date": "2025-08-13",
+        "task": "Finalize venue booking and pay deposit",
+        "responsible": "Client",
+        "priority": "high"
+      },
+      {
+        "date": "2025-08-20",
+        "task": "Confirm catering menu and guest count",
+        "responsible": "Client",
+        "priority": "high"
+      },
+      {
+        "date": "2025-08-27",
+        "task": "Book photographer and schedule engagement shoot",
+        "responsible": "Client",
+        "priority": "medium"
+      },
+      {
+        "date": "2025-09-03",
+        "task": "Book makeup artist and schedule trial",
+        "responsible": "Client",
+        "priority": "medium"
+      }
+    ],
+    "event_day": [
+      {
+        "time": "08:00",
+        "activity": "Makeup artist arrives for bridal preparation",
+        "duration": 180,
+        "responsible": "makeup_artist"
+      },
+      {
+        "time": "10:00",
+        "activity": "Photographer arrives for getting ready shots",
+        "duration": 120,
+        "responsible": "photographer"
+      },
+      {
+        "time": "16:00",
+        "activity": "Wedding ceremony begins",
+        "duration": 90,
+        "location": "Main ceremony area"
+      },
+      {
+        "time": "18:00",
+        "activity": "Reception and dinner service",
+        "duration": 240,
+        "responsible": "caterer"
+      }
+    ],
+    "post_event": [
+      {
+        "date": "2025-10-15",
+        "task": "Receive and review wedding photos",
+        "responsible": "photographer"
+      },
+      {
+        "date": "2025-10-22",
+        "task": "Send thank you notes to guests",
+        "responsible": "Client"
+      }
+    ]
+  },
+  "budget_breakdown": {
+    "venue": 350000,
+    "catering": 270000,
+    "photography": 75000,
+    "makeup": 50000,
+    "total": 745000
+  }
+}

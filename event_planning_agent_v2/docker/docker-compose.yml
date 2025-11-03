@@ -1,0 +1,174 @@
+version: '3.8'
+
+services:
+  # Main Event Planning API
+  event-planning-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      # Database Configuration
+      - DATABASE_URL=postgresql://eventuser:eventpass@postgres:5432/eventdb
+      
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - API_WORKERS=1
+      - DEBUG=false
+      
+      # LLM Configuration
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - GEMMA_MODEL=gemma:2b
+      - TINYLLAMA_MODEL=tinyllama
+      
+      # MCP Configuration
+      - MCP_SERVERS_CONFIG=/app/config/mcp_config.json
+      
+      # Workflow Configuration
+      - BEAM_WIDTH=3
+      - MAX_WORKFLOW_ITERATIONS=20
+      - MAX_ITERATIONS=10
+      
+      # Observability Configuration
+      - LOG_LEVEL=INFO
+      - ENABLE_TRACING=true
+      - ENABLE_METRICS=true
+      - PROMETHEUS_URL=http://prometheus:9090
+      
+      # Security Configuration
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - AUTH_ENABLED=true
+      - RATE_LIMITING_ENABLED=true
+      
+      # Environment
+      - ENVIRONMENT=development
+      - CORS_ORIGINS=*
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+      mcp-servers:
+        condition: service_started
+    volumes:
+      - ../config:/app/config:ro
+      - ../logs:/app/logs
+      - ../data:/app/data
+    networks:
+      - event-planning-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL Database
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: eventdb
+      POSTGRES_USER: eventuser
+      POSTGRES_PASSWORD: eventpass
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - event-planning-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eventuser -d eventdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Ollama LLM Server
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_ORIGINS=*
+    networks:
+      - event-planning-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # MCP Servers Container
+  mcp-servers:
+    build:
+      context: ..
+      dockerfile: docker/mcp-servers.Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://eventuser:eventpass@postgres:5432/eventdb
+      - LOG_LEVEL=INFO
+      - PROMETHEUS_URL=http://prometheus:9090
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ../config:/app/config:ro
+    networks:
+      - event-planning-network
+    restart: unless-stopped
+
+  # Prometheus for Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - event-planning-network
+    restart: unless-stopped
+
+  # Grafana for Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ../monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ../monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - event-planning-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  ollama_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  event-planning-network:
+    driver: bridge

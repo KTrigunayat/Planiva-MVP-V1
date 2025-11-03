@@ -1,0 +1,34 @@
+# Docker Compose for Event Planning Agent v2 GUI
+version: '3.8'
+
+services:
+  streamlit-gui:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://api:8000
+      - ENVIRONMENT=production
+    env_file:
+      - .env
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - event-planning-network
+
+  # Placeholder for the main API service
+  # This should be replaced with the actual Event Planning Agent v2 service
+  api:
+    image: event-planning-agent-v2:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+    restart: unless-stopped
+    networks:
+      - event-planning-network
+
+networks:
+  event-planning-network:
+    driver: bridge

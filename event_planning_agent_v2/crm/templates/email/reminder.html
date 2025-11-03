@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Friendly Reminder - Plan #{{ plan_id }}{% endblock %}
+
+{% block header_title %}Just Checking In{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ client_name }},
+</div>
+
+<div class="message">
+    <p>We wanted to gently remind you about your {{ event_type }} plan. We noticed you haven't completed the next step yet.</p>
+    
+    <div class="info-box">
+        <h3>Action Needed</h3>
+        <p><strong>{{ action_required|default("Please review your options and make a selection") }}</strong></p>
+        {% if deadline %}
+        <p style="margin-top: 10px; color: #666;">
+            <strong>Suggested completion:</strong> {{ deadline|format_date }}
+        </p>
+        {% endif %}
+    </div>
+    
+    <p>We understand you're busy, and there's no pressure! We just want to make sure you have everything you need to move forward.</p>
+    
+    {% if pending_items %}
+    <p><strong>Pending items:</strong></p>
+    <ul>
+        {% for item in pending_items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <p>Taking this next step will bring you closer to your perfect {{ event_type }}!</p>
+</div>
+
+<div class="button-container">
+    <a href="{{ website_url }}/plans/{{ plan_id }}" class="button">Continue Planning</a>
+</div>
+
+<div class="message">
+    <p><strong>Need help or have questions?</strong></p>
+    <p>We're here for you! Reply to this email or contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>.</p>
+    
+    <p style="margin-top: 30px;">
+        Looking forward to helping you create an amazing event!<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

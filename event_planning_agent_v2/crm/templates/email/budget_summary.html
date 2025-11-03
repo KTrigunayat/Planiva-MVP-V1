@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Your Budget Strategies Are Ready - Plan #{{ plan_id }}{% endblock %}
+
+{% block header_title %}Your Custom Budget Strategies{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Great news, {{ client_name }}! 🎉
+</div>
+
+<div class="message">
+    <p>We've analyzed your requirements and created <strong>three customized budget strategies</strong> for your {{ event_type }}. Each strategy is designed to maximize value while staying within your budget.</p>
+    
+    <div class="info-box">
+        <h3>Budget Overview</h3>
+        <p><strong>Total Budget:</strong> {{ total_budget|format_currency }}</p>
+        <p><strong>Event Type:</strong> {{ event_type }}</p>
+        {% if guest_count %}
+        <p><strong>Guest Count:</strong> {{ guest_count }}</p>
+        {% endif %}
+    </div>
+    
+    {% if budget_strategies %}
+    <h3 style="color: #667eea; margin-top: 30px;">Your Three Budget Strategies:</h3>
+    
+    {% for strategy in budget_strategies %}
+    <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 15px 0; border: 2px solid {% if loop.index == 2 %}#667eea{% else %}#e0e0e0{% endif %};">
+        <h4 style="margin-top: 0; color: #333;">
+            {{ loop.index }}. {{ strategy.name }}
+            {% if loop.index == 2 %}<span style="background-color: #667eea; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px;">RECOMMENDED</span>{% endif %}
+        </h4>
+        <p style="color: #666; margin: 10px 0;">{{ strategy.description }}</p>
+        
+        <table style="width: 100%; margin-top: 15px; border-collapse: collapse;">
+            {% for category, amount in strategy.allocations.items() %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 8px 0; color: #555;">{{ category }}</td>
+                <td style="padding: 8px 0; text-align: right; font-weight: 600; color: #333;">{{ amount|format_currency }}</td>
+            </tr>
+            {% endfor %}
+            <tr style="font-weight: bold; background-color: #fff;">
+                <td style="padding: 12px 0; color: #333;">Total</td>
+                <td style="padding: 12px 0; text-align: right; color: #667eea; font-size: 18px;">{{ strategy.total|format_currency }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+    <p style="margin-top: 30px;">Our AI is now searching for the best vendor combinations that match your selected budget strategy. You'll receive vendor options shortly!</p>
+</div>
+
+<div class="button-container">
+    <a href="{{ website_url }}/plans/{{ plan_id }}/budget" class="button">View Detailed Budget Analysis</a>
+</div>
+
+<div class="message">
+    <p>Questions about your budget strategies? We're here to help!</p>
+    
+    <p style="margin-top: 30px;">
+        Best regards,<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

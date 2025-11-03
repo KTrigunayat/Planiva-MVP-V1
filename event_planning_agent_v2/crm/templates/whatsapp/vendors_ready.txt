@@ -1,0 +1,5 @@
+🎉 Great news!
+
+We found {vendor_count} vendor combinations for your {event_type}. Each option is carefully curated to match your preferences.
+
+Check them out: {link}

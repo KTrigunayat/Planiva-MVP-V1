@@ -1,0 +1,3 @@
+👋 Welcome to Planiva!
+
+Your event plan #{plan_id} is being created. We'll notify you as soon as it's ready!

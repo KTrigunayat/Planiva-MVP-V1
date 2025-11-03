@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Your Event Blueprint Is Ready! - Plan #{{ plan_id }}{% endblock %}
+
+{% block header_title %}Your Complete Event Blueprint{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Congratulations, {{ client_name }}! 🎉
+</div>
+
+<div class="message">
+    <p>Your comprehensive event blueprint is ready! We've created a detailed plan that covers every aspect of your {{ event_type }}.</p>
+    
+    <div class="info-box">
+        <h3>Blueprint Includes:</h3>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+            <li><strong>Complete Timeline:</strong> Day-by-day schedule leading up to your event</li>
+            <li><strong>Vendor Coordination:</strong> Contact details and coordination schedules</li>
+            <li><strong>Budget Breakdown:</strong> Detailed cost allocation and payment schedules</li>
+            <li><strong>Checklists:</strong> Task lists to keep you organized</li>
+            <li><strong>Contingency Plans:</strong> Backup options for common scenarios</li>
+        </ul>
+    </div>
+    
+    <p><strong>Your Event Summary:</strong></p>
+    <table style="width: 100%; background-color: #f8f9fa; padding: 15px; border-radius: 6px;">
+        <tr>
+            <td style="padding: 8px;"><strong>Event Type:</strong></td>
+            <td style="padding: 8px;">{{ event_type }}</td>
+        </tr>
+        {% if event_date %}
+        <tr>
+            <td style="padding: 8px;"><strong>Event Date:</strong></td>
+            <td style="padding: 8px;">{{ event_date|format_date }}</td>
+        </tr>
+        {% endif %}
+        {% if guest_count %}
+        <tr>
+            <td style="padding: 8px;"><strong>Guest Count:</strong></td>
+            <td style="padding: 8px;">{{ guest_count }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td style="padding: 8px;"><strong>Total Budget:</strong></td>
+            <td style="padding: 8px;"><strong style="color: #667eea;">{{ total_cost|format_currency }}</strong></td>
+        </tr>
+    </table>
+</div>
+
+<div class="button-container">
+    <a href="{{ blueprint_url }}" class="button">Download Your Blueprint (PDF)</a>
+</div>
+
+<div class="message">
+    <p><strong>Next Steps:</strong></p>
+    <ol>
+        <li>Download and review your blueprint</li>
+        <li>Start contacting vendors to confirm bookings</li>
+        <li>Follow the timeline to stay on track</li>
+        <li>Reach out if you need any assistance</li>
+    </ol>
+    
+    <p>We're here to support you throughout your planning journey. Don't hesitate to reach out with questions!</p>
+    
+    <p style="margin-top: 30px;">
+        Wishing you an amazing event!<br>
+        <strong>The {{ company_name }} Team</strong>
+    </p>
+</div>
+{% endblock %}

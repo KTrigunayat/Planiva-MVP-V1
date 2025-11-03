@@ -1,0 +1,371 @@
+================================================================================
+EVENT MANAGEMENT PLATFORM - COMPLETE DEMO OUTPUT
+================================================================================
+Generated: 2025-10-28 23:56:21
+================================================================================
+
+
+================================================================================
+🎉 COMPLETE EVENT MANAGEMENT PLATFORM DEMO
+================================================================================
+🎯 This demo showcases the complete Event Planning Agent v2 platform:
+   � PaPrt 1: Event Planning - AI-powered vendor sourcing and optimization
+   � Part 2:3 CRM - Client communication preferences and tracking
+   📅 Part 3: Task Management - Task tracking, timeline, and conflict resolution
+
+📁 Using client data from: streamlit_gui/client_data.json
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Loading Client Data
+────────────────────────────────────────────────────────────────────────────────
+✅ Client data loaded successfully
+   👰 Client: Priya & Rohit
+   📧 Email: priya.rohit@email.com
+   📅 Event Date: 2025-12-15
+   📍 Location: Bangalore, Karnataka, India
+   👥 Guests: 150
+   💰 Budget: ₹800,000
+
+────────────────────────────────────────────────────────────────────────────────
+📋 API Health Check
+────────────────────────────────────────────────────────────────────────────────
+🎭 Running in DEMO MODE with simulated responses
+✅ Demo API Status: Active
+📊 Demo Version: v2.0.0
+🕐 Timestamp: 2025-10-28T23:56:08.093866
+
+================================================================================
+🎉 PART 1: EVENT PLANNING
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Creating Event Plan
+────────────────────────────────────────────────────────────────────────────────
+📤 Sending event planning request...
+   Event Type: Wedding
+   Guest Count: 150
+   Budget: ₹800,000
+🎭 Demo Mode: Using plan ID demo_plan_20251028_235612
+✅ Event plan created successfully in demo mode!
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Monitoring Planning Progress
+────────────────────────────────────────────────────────────────────────────────
+🔄 AI Agents working on your event plan...
+💡 This demonstrates the multi-agent workflow:
+   🤖 Orchestrator Agent - Coordinating the workflow
+   🤖 Budgeting Agent - Analyzing budget allocation
+   🤖 Sourcing Agent - Finding matching vendors
+   🤖 Optimization Agent - Creating combinations
+   🤖 Scoring Agent - Ranking options
+
+✅ Planning completed successfully!
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Retrieving Vendor Combinations
+────────────────────────────────────────────────────────────────────────────────
+✅ Retrieved 2 vendor combinations
+
+� ComVbination 1:
+   💯 Fitness Score: 92.5%
+   � Totaol Cost: ₹745,000
+   🏢 Venue: Grand Banquet Hall Bangalore
+   🍽️ Caterer: Royal South Indian Caterers
+   📸 Photographer: Traditional Moments Photography
+   💄 Makeup: Bridal Beauty Experts
+
+� ComVbination 2:
+   💯 Fitness Score: 88.3%
+   � Totaol Cost: ₹720,000
+   🏢 Venue: Elegant Gardens Venue
+   🍽️ Caterer: Heritage Catering Services
+   📸 Photographer: Classic Wedding Photography
+   💄 Makeup: Glamour Studio Bangalore
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Selecting Best Combination
+────────────────────────────────────────────────────────────────────────────────
+✅ Selected combination with highest fitness score
+   💯 Fitness Score: 92.5%
+   � T otal Cost: ₹745,000
+   📊 Budget Utilization: 93.1%
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Generating Final Blueprint
+────────────────────────────────────────────────────────────────────────────────
+✅ Final blueprint generated successfully!
+   📋 Plan ID: demo_plan_20251028_235612
+   � Client:  Priya & Rohit
+   📅 Event Date: 2025-12-15
+   💰 Budget: ₹800,000
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Exporting Blueprint
+────────────────────────────────────────────────────────────────────────────────
+✅ Blueprint exported: event_blueprint_20251028_235617.json
+
+✅ Event Planning Phase Complete!
+
+================================================================================
+🎉 PART 2: CRM & COMMUNICATION MANAGEMENT
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Setting Communication Preferences
+────────────────────────────────────────────────────────────────────────────────
+🎭 Demo Mode: Preferences configured
+   📧 Preferred Channels: Email, SMS, WhatsApp
+   � Timezeone: Asia/Kolkata
+   🌙 Quiet Hours: 22:00 - 08:00
+   🔔 Notifications: Enabled for all event updates
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Communication History
+────────────────────────────────────────────────────────────────────────────────
+✅ Retrieved 4 communications
+
+📨 Recent Communications:
+
+   ✅ 📧 Welcome
+      Channel: Email
+      Status: Delivered
+      Sent: 2025-10-28T21:56:21
+      ✓ Opened: 2025-10-28T22:11:21
+
+   ✅ 📧 Budget Summary
+      Channel: Email
+      Status: Delivered
+      Sent: 2025-10-28T22:56:21
+      ✓ Opened: 2025-10-28T23:11:21
+
+   ✅ 📱 Vendor Options
+      Channel: SMS
+      Status: Delivered
+      Sent: 2025-10-28T23:26:21
+
+   ✅ 💬 Confirmation
+      Channel: WhatsApp
+      Status: Delivered
+      Sent: 2025-10-28T23:46:21
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Communication Analytics
+────────────────────────────────────────────────────────────────────────────────
+✅ Communication Analytics Summary
+
+📊 Overall Metrics:
+   Total Sent: 4
+   Total Delivered: 4 (100.0%)
+   Total Opened: 2 (50.0%)
+   Total Clicked: 1 (25.0%)
+   Failed: 0
+
+� Perfofrmance by Channel:
+   Email:
+      Sent: 2, Delivered: 2
+      Opened: 2, Clicked: 1
+   SMS:
+      Sent: 1, Delivered: 1
+   WhatsApp:
+      Sent: 1, Delivered: 1
+
+💡 Insights:
+   ✓ 100% delivery rate - excellent!
+   ✓ Email engagement is strong (50% open rate)
+   ✓ All channels working effectively
+   ✓ Client is actively engaged with communications
+
+✅ CRM & Communication Phase Complete!
+
+================================================================================
+🎉 PART 3: TASK MANAGEMENT
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Extended Task List
+────────────────────────────────────────────────────────────────────────────────
+✅ Retrieved 12 tasks
+
+📋 Task Overview:
+
+   🔴 Critical Priority (6 tasks):
+      ✅ Venue booking and contract signing
+         Duration: 120 min | Vendor: Grand Banquet Hall
+      🔄 Catering menu finalization
+         Duration: 180 min | Vendor: Royal South Indian Caterers
+      ⏳ Final guest count confirmation
+         Duration: 60 min | Vendor: Client
+
+   🟠 High Priority (4 tasks):
+      🔄 Photography package booking
+         Duration: 90 min | Vendor: Traditional Moments Photography
+      ⏳ Makeup trial session
+         Duration: 120 min | Vendor: Bridal Beauty Experts
+      ⏳ Venue setup and decoration
+         Duration: 480 min | Vendor: Grand Banquet Hall
+
+   🟡 Medium Priority (2 tasks):
+      ⏳ Venue decoration planning
+         Duration: 240 min | Vendor: Grand Banquet Hall
+      ⏳ Photography - Getting ready shots
+         Duration: 120 min | Vendor: Traditional Moments Photography
+
+📊 Task Statistics:
+   Total Tasks: 12
+   ✅ Completed: 1 (8.3%)
+   🔄 In Progress: 2 (16.7%)
+   ⏳ Pending: 9 (75.0%)
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Timeline Visualization
+────────────────────────────────────────────────────────────────────────────────
+✅ Timeline Gantt Chart Generated
+
+📅 Event Timeline Overview:
+   ✓ 2025-10-16 (completed): Venue booking deadline
+   📍 2025-10-31 (2 days): Catering menu finalization
+   📍 2025-11-15 (17 days): Photography session booking
+   📍 2025-12-01 (33 days): Final guest count confirmation
+   📍 2025-12-08 (40 days): Final vendor confirmations
+   📍 2025-12-14 (46 days): Final setup and preparation
+   📍 2025-12-15 (47 days): 🎉 WEDDING DAY 🎉
+
+💡 Timeline Features:
+   ✓ Color-coded by priority (Critical=Red, High=Orange, Medium=Yellow, Low=Green)
+   ✓ Shows task dependencies and relationships
+   ✓ Identifies overlapping tasks and conflicts
+   ✓ Interactive zoom controls (Day/Week/Month view)
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Conflict Detection & Resolution
+────────────────────────────────────────────────────────────────────────────────
+⚠️ Found 2 potential conflicts
+
+   🟡 Conflict 1: Timeline Overlap
+      Severity: Medium
+      Issue: Photographer and makeup artist both scheduled at 10:00 AM
+      Affected: Bridal makeup, Getting ready photos
+      💡 Suggested Fix: Start makeup at 8:00 AM, photography at 10:00 AM
+
+   🟢 Conflict 2: Venue Conflict
+      Severity: Low
+      Issue: Ceremony setup overlaps with venue decoration
+      Affected: Venue decoration, Ceremony setup
+      💡 Suggested Fix: Complete decoration by 2:00 PM, start ceremony setup at 2:30 PM
+
+✅ Conflict Resolution Options:
+   1. Apply suggested resolutions automatically
+   2. Manually adjust task schedules
+   3. Contact vendors to negotiate timing
+   4. Review and resolve in Timeline view
+
+────────────────────────────────────────────────────────────────────────────────
+📋 Vendor Assignments & Workload
+────────────────────────────────────────────────────────────────────────────────
+✅ 4 vendors assigned
+
+   👥 Grand Banquet Hall Bangalore
+      Type: Venue
+      Contact: +91-80-12345678
+      Email: events@grandbanquet.com
+      💯 Fitness Score: 92.5%
+      🟡 Workload: Medium (5 tasks)
+      Tasks: Venue setup, Ceremony space preparation, Reception area setup...
+
+   👥 Royal South Indian Caterers
+      Type: Caterer
+      Contact: +91-98765-43210
+      Email: bookings@royalcaterers.com
+      💯 Fitness Score: 95.0%
+      🟠 Workload: High (8 tasks)
+      Tasks: Menu planning, Food preparation, Service setup...
+
+   👥 Traditional Moments Photography
+      Type: Photographer
+      Contact: +91-99876-54321
+      Email: info@traditionalmoments.com
+      💯 Fitness Score: 88.0%
+      🟡 Workload: Medium (6 tasks)
+      Tasks: Getting ready photos, Ceremony coverage, Family portraits...
+
+   👥 Bridal Beauty Experts
+      Type: Makeup Artist
+      Contact: +91-98765-12345
+      Email: bookings@bridalbeauty.com
+      💯 Fitness Score: 90.0%
+      🟢 Workload: Low (3 tasks)
+      Tasks: Bridal makeup, Touch-ups, Bridal party makeup
+
+📊 Workload Distribution:
+   High: 1 vendor (25%)
+   Medium: 2 vendors (50%)
+   Low: 1 vendor (25%)
+
+💡 Workload is well-balanced across vendors
+
+✅ Task Management Phase Complete!
+
+================================================================================
+🎉 DEMO COMPLETED SUCCESSFULLY! 🎉
+================================================================================
+
+✅ All platform features demonstrated:
+
+📋 EVENT PLANNING:
+   ✓ Client requirements processing
+   ✓ AI-powered vendor sourcing
+   ✓ Multi-agent workflow coordination
+   ✓ Intelligent combination optimization
+   ✓ Fitness scoring and ranking
+   ✓ Comprehensive blueprint generation
+   ✓ Multi-format export capabilities
+
+💬 CRM & COMMUNICATIONS:
+   ✓ Communication preference management
+   ✓ Multi-channel support (Email, SMS, WhatsApp)
+   ✓ Timezone and quiet hours configuration
+   ✓ Communication history tracking
+   ✓ Delivery and engagement monitoring
+   ✓ Analytics and performance metrics
+   ✓ Channel effectiveness analysis
+
+📅 TASK MANAGEMENT:
+   ✓ Extended task list with dependencies
+   ✓ Priority-based task organization
+   ✓ Timeline visualization (Gantt chart)
+   ✓ Conflict detection and resolution
+   ✓ Vendor assignment tracking
+   ✓ Workload distribution analysis
+   ✓ Progress monitoring and reporting
+
+🎊 Event Details:
+   Client: Priya & Rohit
+   Event: Wedding
+   Date: 2025-12-15
+   Location: Bangalore, Karnataka, India
+   Guests: 150
+   Budget: ₹800,000
+   Theme: Traditional Elegant
+
+📊 Platform Capabilities:
+   • End-to-end event planning automation
+   • Real-time client communication management
+   • Comprehensive task and vendor coordination
+   • AI-powered optimization and recommendations
+   • Multi-channel engagement tracking
+   • Conflict detection and resolution
+   • Progress monitoring and analytics
+
+💡 Next Steps:
+   1. Review the generated blueprint and task list
+   2. Confirm vendor selections and bookings
+   3. Monitor task progress and resolve conflicts
+   4. Track client communications and engagement
+   5. Use analytics to optimize event planning
+
+🚀 The complete Event Management Platform is ready!
+================================================================================
+
+================================================================================
+END OF DEMO OUTPUT
+================================================================================

@@ -1,0 +1,138 @@
+{
+  "mcpServers": {
+    "vendor-data-server": {
+      "command": "python",
+      "args": ["-m", "event_planning_agent_v2.mcp_servers.vendor_server"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}",
+        "LOG_LEVEL": "INFO",
+        "MCP_SERVER_PORT": "8001",
+        "MCP_SERVER_HOST": "0.0.0.0",
+        "ENABLE_SECURITY": "true",
+        "MAX_CONNECTIONS": "20",
+        "CONNECTION_TIMEOUT": "15",
+        "REQUEST_TIMEOUT": "30",
+        "AUTH_TOKEN": "${MCP_AUTH_TOKEN}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "enhanced_vendor_search",
+        "vendor_compatibility_check",
+        "vendor_availability_check"
+      ],
+      "security": {
+        "allowedOrigins": ["${API_BASE_URL}"],
+        "requireAuth": true,
+        "rateLimiting": {
+          "enabled": true,
+          "requestsPerMinute": 500,
+          "burstLimit": 100
+        },
+        "ipWhitelist": ["${API_SERVER_IP}"]
+      },
+      "healthCheck": {
+        "enabled": true,
+        "interval": 15,
+        "timeout": 5,
+        "retries": 5
+      }
+    },
+    "calculation-server": {
+      "command": "python",
+      "args": ["-m", "event_planning_agent_v2.mcp_servers.calculation_server"],
+      "env": {
+        "LOG_LEVEL": "INFO",
+        "MCP_SERVER_PORT": "8002",
+        "MCP_SERVER_HOST": "0.0.0.0",
+        "ENABLE_SECURITY": "true",
+        "MAX_CONNECTIONS": "20",
+        "CONNECTION_TIMEOUT": "15",
+        "REQUEST_TIMEOUT": "60",
+        "AUTH_TOKEN": "${MCP_AUTH_TOKEN}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "fitness_score_calculation",
+        "budget_optimization",
+        "cost_prediction"
+      ],
+      "security": {
+        "allowedOrigins": ["${API_BASE_URL}"],
+        "requireAuth": true,
+        "rateLimiting": {
+          "enabled": true,
+          "requestsPerMinute": 1000,
+          "burstLimit": 200
+        },
+        "ipWhitelist": ["${API_SERVER_IP}"]
+      },
+      "healthCheck": {
+        "enabled": true,
+        "interval": 15,
+        "timeout": 5,
+        "retries": 5
+      }
+    },
+    "monitoring-server": {
+      "command": "python",
+      "args": ["-m", "event_planning_agent_v2.mcp_servers.monitoring_server"],
+      "env": {
+        "LOG_LEVEL": "INFO",
+        "MCP_SERVER_PORT": "8003",
+        "MCP_SERVER_HOST": "0.0.0.0",
+        "PROMETHEUS_URL": "${PROMETHEUS_URL}",
+        "ENABLE_SECURITY": "true",
+        "MAX_CONNECTIONS": "10",
+        "CONNECTION_TIMEOUT": "15",
+        "REQUEST_TIMEOUT": "15",
+        "AUTH_TOKEN": "${MCP_AUTH_TOKEN}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "log_agent_interaction",
+        "track_workflow_performance",
+        "generate_health_report"
+      ],
+      "security": {
+        "allowedOrigins": ["${API_BASE_URL}"],
+        "requireAuth": true,
+        "rateLimiting": {
+          "enabled": true,
+          "requestsPerMinute": 2000,
+          "burstLimit": 500
+        },
+        "ipWhitelist": ["${API_SERVER_IP}"]
+      },
+      "healthCheck": {
+        "enabled": true,
+        "interval": 15,
+        "timeout": 5,
+        "retries": 5
+      }
+    }
+  },
+  "globalSettings": {
+    "security": {
+      "enableTLS": true,
+      "tlsCertPath": "/etc/ssl/certs/mcp-server.crt",
+      "tlsKeyPath": "/etc/ssl/private/mcp-server.key",
+      "authTokenExpiry": 1800,
+      "maxConcurrentConnections": 100,
+      "enableAuditLogging": true
+    },
+    "logging": {
+      "level": "INFO",
+      "format": "json",
+      "enableMetrics": true,
+      "metricsPort": 9090,
+      "enableStructuredLogging": true
+    },
+    "performance": {
+      "enableCaching": true,
+      "cacheSize": 5000,
+      "cacheTTL": 600,
+      "enableCompression": true,
+      "compressionLevel": 6
+    }
+  }
+}
