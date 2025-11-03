@@ -11,8 +11,12 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any, Union
 from enum import Enum
 from functools import lru_cache
-from pydantic import BaseSettings, Field, validator, root_validator
-from pydantic.networks import AnyHttpUrl, PostgresDsn
+from pydantic import Field, field_validator, model_validator
+from pydantic_settings import BaseSettings
+try:
+    from pydantic.networks import AnyHttpUrl, PostgresDsn
+except ImportError:
+    from pydantic import AnyHttpUrl, PostgresDsn
 
 
 class Environment(str, Enum):
@@ -94,7 +98,8 @@ class APISettings(BaseSettings):
         env="CORS_HEADERS"
     )
     
-    @validator('cors_origins', pre=True)
+    @field_validator('cors_origins', mode='before')
+    @classmethod
     def parse_cors_origins(cls, v):
         if isinstance(v, str):
             return [origin.strip() for origin in v.split(',')]
@@ -122,13 +127,15 @@ class SecuritySettings(BaseSettings):
     enable_security_headers: bool = Field(default=True, env="ENABLE_SECURITY_HEADERS")
     allowed_hosts: List[str] = Field(default=["*"], env="ALLOWED_HOSTS")
     
-    @validator('jwt_secret')
+    @field_validator('jwt_secret')
+    @classmethod
     def validate_jwt_secret(cls, v):
         if len(v) < 32:
             raise ValueError('JWT secret must be at least 32 characters long')
         return v
     
-    @validator('allowed_hosts', pre=True)
+    @field_validator('allowed_hosts', mode='before')
+    @classmethod
     def parse_allowed_hosts(cls, v):
         if isinstance(v, str):
             return [host.strip() for host in v.split(',')]
@@ -227,7 +234,8 @@ class MCPSettings(BaseSettings):
     connection_timeout: int = Field(default=30, env="MCP_CONNECTION_TIMEOUT", ge=5, le=300)
     request_timeout: int = Field(default=60, env="MCP_REQUEST_TIMEOUT", ge=10, le=600)
     
-    @validator('auto_approve_tools', pre=True)
+    @field_validator('auto_approve_tools', mode='before')
+    @classmethod
     def parse_auto_approve_tools(cls, v):
         if isinstance(v, str):
             return [tool.strip() for tool in v.split(',') if tool.strip()]
@@ -287,21 +295,17 @@ class Settings(BaseSettings):
         case_sensitive = False
         validate_assignment = True
         
-    @root_validator
-    def validate_environment_specific_settings(cls, values):
+    @model_validator(mode='after')
+    def validate_environment_specific_settings(self):
         """Validate settings based on environment"""
-        env = values.get('environment')
-        
-        if env == Environment.PRODUCTION:
+        if self.environment == Environment.PRODUCTION:
             # Production-specific validations
-            security = values.get('security', {})
-            if isinstance(security, SecuritySettings):
-                if security.jwt_secret == "your-secret-key":
-                    raise ValueError("JWT secret must be changed in production")
-                if not security.auth_enabled:
-                    logging.warning("Authentication is disabled in production")
+            if self.security.jwt_secret == "your-secret-key":
+                raise ValueError("JWT secret must be changed in production")
+            if not self.security.auth_enabled:
+                logging.warning("Authentication is disabled in production")
         
-        return values
+        return self
     
     def get_mcp_config(self) -> Dict[str, Any]:
         """Load and validate MCP configuration"""
