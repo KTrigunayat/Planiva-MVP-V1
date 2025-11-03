@@ -6,9 +6,16 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from event_planning_agent_v2.config.settings import get_settings
-from event_planning_agent_v2.api.routes import router
-from event_planning_agent_v2.api.middleware import ErrorHandlingMiddleware, LoggingMiddleware
+try:
+    # Try relative imports first (for when running from parent directory)
+    from event_planning_agent_v2.config.settings import get_settings
+    from event_planning_agent_v2.api.routes import router
+    from event_planning_agent_v2.api.middleware import ErrorHandlingMiddleware, LoggingMiddleware
+except ModuleNotFoundError:
+    # Fall back to absolute imports (for when running from within the directory)
+    from config.settings import get_settings
+    from api.routes import router
+    from api.middleware import ErrorHandlingMiddleware, LoggingMiddleware
 
 # Get settings
 settings = get_settings()
@@ -53,7 +60,7 @@ async def metrics():
 def main():
     """Main entry point"""
     uvicorn.run(
-        "event_planning_agent_v2.main:app",
+        "main:app",
         host=settings.api_host,
         port=settings.api_port,
         reload=settings.api_reload,
