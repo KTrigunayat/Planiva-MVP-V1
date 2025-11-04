@@ -111,68 +111,67 @@ class CreatePlanPage:
                 show_error(f"Error importing file: {str(e)}")
     
     def prepare_api_request(self, form_data: Dict) -> Dict:
-        """Prepare form data for API submission"""
-        # Transform form data to match API expectations
+        """Prepare form data for API submission - matches backend EventPlanRequest schema"""
+        # Build client vision from multiple fields
+        vision_parts = []
+        if form_data.get('client_vision'):
+            vision_parts.append(form_data['client_vision'])
+        if form_data.get('event_theme'):
+            vision_parts.append(f"Theme: {form_data['event_theme']}")
+        if form_data.get('color_scheme'):
+            vision_parts.append(f"Colors: {form_data['color_scheme']}")
+        if form_data.get('must_haves'):
+            vision_parts.append(f"Must-haves: {form_data['must_haves']}")
+        
+        client_vision = ". ".join(vision_parts) if vision_parts else "Modern elegant event"
+        
+        # Build guest count (required field)
+        total_guests = form_data.get('total_guests', 100)
+        guest_count = {
+            "total": total_guests,
+            "Reception": form_data.get('reception_guests', total_guests),
+            "Ceremony": form_data.get('ceremony_guests', total_guests)
+        }
+        
+        # Transform to match API schema (camelCase)
         api_request = {
-            # Basic information
-            'client_name': form_data.get('client_name', ''),
-            'client_email': form_data.get('client_email', ''),
-            'client_phone': form_data.get('client_phone', ''),
-            'event_type': form_data.get('event_type', ''),
-            'event_date': form_data.get('event_date').isoformat() if form_data.get('event_date') else None,
-            'location': form_data.get('location', ''),
-            'start_time': form_data.get('start_time').strftime('%H:%M') if form_data.get('start_time') else None,
-            'duration_hours': form_data.get('duration_hours', 4),
+            # Required fields
+            'clientName': form_data.get('client_name', 'Unknown Client'),
+            'guestCount': guest_count,
+            'clientVision': client_vision,
             
-            # Guest information
-            'total_guests': form_data.get('total_guests', 0),
-            'ceremony_guests': form_data.get('ceremony_guests'),
-            'reception_guests': form_data.get('reception_guests'),
-            'adult_guests': form_data.get('adult_guests'),
-            'child_guests': form_data.get('child_guests'),
-            'special_needs_guests': form_data.get('special_needs_guests', 0),
+            # Optional fields
+            'venuePreferences': form_data.get('venue_types', []),
+            'essentialVenueAmenities': form_data.get('essential_amenities', []),
+            'budget': form_data.get('total_budget'),
+            'eventDate': form_data.get('event_date').isoformat() if form_data.get('event_date') else None,
+            'location': form_data.get('location'),
             
-            # Budget information
-            'total_budget': form_data.get('total_budget', 0),
-            'budget_flexibility': form_data.get('budget_flexibility', ''),
-            'budget_allocation': form_data.get('budget_allocation', {}),
+            # Nested objects
+            'decorationAndAmbiance': {
+                'theme': form_data.get('event_theme', ''),
+                'colorScheme': form_data.get('color_scheme', ''),
+                'stylePreferences': form_data.get('style_preferences', []),
+                'atmosphereGoals': form_data.get('atmosphere_goals', [])
+            } if any([form_data.get('event_theme'), form_data.get('color_scheme')]) else None,
             
-            # Preferences
-            'venue_types': form_data.get('venue_types', []),
-            'venue_style': form_data.get('venue_style', []),
-            'essential_amenities': form_data.get('essential_amenities', []),
-            'cuisine_preferences': form_data.get('cuisine_preferences', []),
-            'dietary_restrictions': form_data.get('dietary_restrictions', []),
-            'service_style': form_data.get('service_style', ''),
+            'foodAndCatering': {
+                'cuisinePreferences': form_data.get('cuisine_preferences', []),
+                'dietaryRestrictions': form_data.get('dietary_restrictions', []),
+                'serviceStyle': form_data.get('service_style', ''),
+                'specialRequirements': form_data.get('catering_special_requirements', '')
+            } if any([form_data.get('cuisine_preferences'), form_data.get('dietary_restrictions')]) else None,
             
-            # Services
-            'photography_needed': form_data.get('photography_needed', False),
-            'photography_style': form_data.get('photography_style', []),
-            'videography_needed': form_data.get('videography_needed', False),
-            'makeup_needed': form_data.get('makeup_needed', False),
-            'makeup_style': form_data.get('makeup_style', []),
-            'additional_services': form_data.get('additional_services', []),
-            
-            # Vision and theme
-            'event_theme': form_data.get('event_theme', ''),
-            'color_scheme': form_data.get('color_scheme', ''),
-            'style_preferences': form_data.get('style_preferences', []),
-            'client_vision': form_data.get('client_vision', ''),
-            'special_traditions': form_data.get('special_traditions', ''),
-            'must_haves': form_data.get('must_haves', ''),
-            'avoid_elements': form_data.get('avoid_elements', ''),
-            
-            # Additional metadata
-            'priorities': form_data.get('priorities', {}),
-            'guest_preferences': form_data.get('guest_preferences', []),
-            'atmosphere_goals': form_data.get('atmosphere_goals', []),
-            'transportation_needs': form_data.get('transportation_needs', []),
-            'catering_special_requirements': form_data.get('catering_special_requirements', ''),
-            'service_requirements': form_data.get('service_requirements', ''),
-            
-            # Form metadata
-            'form_version': '1.0',
-            'submitted_at': datetime.now().isoformat()
+            'additionalRequirements': {
+                'photographyNeeded': form_data.get('photography_needed', False),
+                'photographyStyle': form_data.get('photography_style', []),
+                'videographyNeeded': form_data.get('videography_needed', False),
+                'makeupNeeded': form_data.get('makeup_needed', False),
+                'makeupStyle': form_data.get('makeup_style', []),
+                'additionalServices': form_data.get('additional_services', []),
+                'specialTraditions': form_data.get('special_traditions', ''),
+                'transportationNeeds': form_data.get('transportation_needs', [])
+            } if any([form_data.get('photography_needed'), form_data.get('videography_needed')]) else None
         }
         
         # Remove None values and empty strings/lists
